@@ -16,13 +16,14 @@ pipeline {
         stage('Test') {
             steps {
                 sh '(cd devops/maven && mvn clean install)'
+		sh '(cp devops/maven/target/maven.war devops/docker/maven.war)'
             }
         }
         stage('Deploy') {
             steps {
 		sh '''
 		chmod 755 devops/docker/install_docker.sh && ./devops/docker/install_docker.sh
-		cd devops/docker/ && docker build -t app1 .
+		cd devops/docker/ && sudo docker build -t app1 .
 		'''
                 
             }
