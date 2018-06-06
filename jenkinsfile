@@ -20,7 +20,11 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
+		sh '''
+		chmod 755 devops/docker/install_docker.sh && ./devops/docker/install_docker.sh
+		cd devops/docker/ && docker build -t app1 .
+		'''
+                
             }
         }
     }
