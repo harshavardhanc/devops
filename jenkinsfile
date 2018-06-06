@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+		sh '''
+		rm -rf devops
+		git clone https://github.com/harshavardhanc/devops.git
+		chmod 755 devops/ansible/install_ansible.sh && ./devops/ansible/install_ansible.sh
+		export ANSIBLE_HOST_KEY_CHECKING=false &&  ansible-playbook -i devops/ansible/inventory/hosts devops/ansible/main.yml
+		'''
+                
+            }
+        }
+        stage('Test') {
+            steps {
+                sh '(cd devops/maven && mvn clean install)'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
+    }
+}
