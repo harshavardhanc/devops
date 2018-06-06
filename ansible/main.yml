@@ -1,0 +1,13 @@
+---
+
+
+# Playbook to install Jenkins
+
+- name: Installaing java
+  hosts: remote
+  roles:
+    - java
+    - maven
+   
+
+

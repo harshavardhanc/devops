@@ -1,0 +1,5 @@
+# Add the remote machine ip address and credentials
+
+
+[remote]
+13.232.60.234 ansible_python_interpreter=/usr/bin/python3 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=inventory/newkey.pem

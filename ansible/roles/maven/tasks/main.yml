@@ -1,0 +1,29 @@
+---
+# Installing maven
+
+
+- name: Download Apache Maven file
+  become: yes
+  get_url:
+    url: http://apache.mirrors.lucidnetworks.net/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+    dest: /home/ubuntu
+
+
+
+- name: Untar donwloaded maven file
+  become: yes
+  unarchive:
+    src: /home/ubuntu/apache-maven-3.3.9-bin.tar.gz
+    dest: /home/ubuntu
+    remote_src: yes
+
+
+- name: Configure maven and its environment variables
+  lineinfile:
+       dest: "/home/ubuntu/.bashrc"
+       line: "{{ item.line }}"
+       create: yes
+       state: present
+  with_items:
+       - { line: 'M2_HOME=/home/ubuntu/apache-maven-3.3.9' }
+       - { line: 'PATH=$PATH:$M2_HOME/bin' }
