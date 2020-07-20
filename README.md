@@ -1,2 +1,2 @@
 # devops
-Java, Maven, Jenkins and Ansible
+Java, Maven, Jenkins and Ansible.
